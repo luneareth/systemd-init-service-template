@@ -1,0 +1,11 @@
+[Unit]
+Description=Port Forward from end server listen 9396,make tunnel in server 10.32.12.21 and create port 9696 direct to 9396
+After=network.target
+
+[Service]
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -NR 9696:localhost:9396 asu@10.32.12.21
+
+[Install]
+WantedBy=multi-user.target
+
